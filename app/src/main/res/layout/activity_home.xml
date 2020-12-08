@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarHomeActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewHomeActivityHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="22sp"
+                android:textColor="@color/colorWhite"
+                android:layout_centerInParent="true"
+                android:paddingRight="40dp" />
+
+            <ImageView
+                android:id="@+id/imageViewHomeActivitySearch"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_round_search_24"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="18dp"
+                android:layout_toLeftOf="@id/textViewHomeActivityHome" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHomeActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolBarHomeActivity"
+        android:layout_above="@id/bottomToolBar" />
+
+    <ProgressBar
+        android:id="@+id/progressBarHomeActivity"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/bottomToolBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="TOP"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="60dp" />
+
+            <TextView
+                android:id="@+id/textBawn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@id/txtLatest"
+                android:layout_toRightOf="@id/txtTop"
+                android:text="Dawn"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLatest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="LATEST"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+</RelativeLayout>
