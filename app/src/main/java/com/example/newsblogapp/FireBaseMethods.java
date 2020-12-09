@@ -86,6 +86,38 @@ public class FireBaseMethods
         }); // addValueEventListener closed
     } // getAllPosts closed
 
+
+    public void getEveryPosts(final PostsListCallBack callBack)
+    {
+        databaseReference.child(Constants.Posts).addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+
+                allPosts = new ArrayList<>();
+                if (dataSnapshot.exists())
+                {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                    {
+                        Post post = snapshot.getValue(Post.class);
+                        allPosts.add(post);
+                    } // for closed
+                    callBack.postList(allPosts);
+                } // if closed
+
+            } // onDataChange closed
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onCancelled: " + databaseError.getMessage());
+            } // onCancelled closed
+        }); // addValueEventListener closed
+    } // getAllPosts closed
+
+
     public void getUserName(String userId, final UserNameCallBack callBack)
     {
 

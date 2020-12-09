@@ -15,13 +15,15 @@ import androidx.constraintlayout.helper.widget.Layer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsblogapp.FireBaseMethods;
-import com.example.newsblogapp.PostDetailsActivity;
 import com.example.newsblogapp.R;
+import com.example.newsblogapp.activities.PostDetailsActivity;
 import com.example.newsblogapp.model.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.example.newsblogapp.adapter.TimeFormat.getRelationTime;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>
 {
@@ -62,9 +64,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position)
     {
         Post post = postList.get(position);
-        Picasso.get().load(post.getPostThumbnailUrl()).placeholder(context.getResources().getDrawable(R.color.colorWhite)).into(holder.imageViewPostThumbNail);
+        Picasso.get().load(post.getPostThumbnailUrl()).placeholder(context.getResources().getDrawable(R.color.colorPrimaryDark)).into(holder.imageViewPostThumbNail);
         holder.textViewPostTitle.setText(post.getPostTitle());
-        holder.textViewTime.setText("UPDATED  " + getRelationTime(post.getTimestamp()));
+        holder.textViewTime.setText("UPDATED  " + TimeFormat.getRelationTime(post.getTimestamp()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -85,36 +87,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         return postList.size();
     }
 
-    public static final long AVERAGE_MONTH_IN_MILLIS = DateUtils.DAY_IN_MILLIS * 30;
 
-    public String getRelationTime(long time)
-    {
-        final long now = new Date().getTime();
-        final long delta = now - time;
-        long resolution;
-        if (delta <= DateUtils.MINUTE_IN_MILLIS)
-        {
-            resolution = DateUtils.SECOND_IN_MILLIS;
-        } else if (delta <= DateUtils.HOUR_IN_MILLIS)
-        {
-            resolution = DateUtils.MINUTE_IN_MILLIS;
-        } else if (delta <= DateUtils.DAY_IN_MILLIS)
-        {
-            resolution = DateUtils.HOUR_IN_MILLIS;
-        } else if (delta <= DateUtils.WEEK_IN_MILLIS)
-        {
-            resolution = DateUtils.DAY_IN_MILLIS;
-        } else if (delta <= AVERAGE_MONTH_IN_MILLIS)
-        {
-            return Integer.toString((int) (delta / DateUtils.WEEK_IN_MILLIS)) + " weeks(s) ago";
-        } else if (delta <= DateUtils.YEAR_IN_MILLIS)
-        {
-            return Integer.toString((int) (delta / AVERAGE_MONTH_IN_MILLIS)) + " month(s) ago";
-        } else
-        {
-            return Integer.toString((int) (delta / DateUtils.YEAR_IN_MILLIS)) + " year(s) ago";
-        }
-        return DateUtils.getRelativeTimeSpanString(time, now, resolution).toString();
-    }
 
 }

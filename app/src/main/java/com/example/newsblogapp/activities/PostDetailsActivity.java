@@ -1,4 +1,4 @@
-package com.example.newsblogapp;
+package com.example.newsblogapp.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.newsblogapp.FireBaseMethods;
+import com.example.newsblogapp.R;
 import com.example.newsblogapp.adapter.PostDetailsAdapter;
 import com.example.newsblogapp.model.Post;
 import com.example.newsblogapp.utils.Constants;
@@ -52,6 +54,7 @@ public class PostDetailsActivity extends AppCompatActivity
                 PostDetailsAdapter adapter = new PostDetailsAdapter(context, postList);
                 viewPager.setAdapter(adapter);
                 viewPager.setCurrentItem(position);
+                adapter.notifyDataSetChanged();
             }
         });
 

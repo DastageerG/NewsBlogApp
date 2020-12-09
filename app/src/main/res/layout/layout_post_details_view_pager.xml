@@ -90,5 +90,57 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_below="@id/textViewHomeLatest" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewHomeLatest"
+            android:layout_marginTop="65dp">
+
+            <LinearLayout
+                android:id="@+id/buttonInsideViePagerBack"
+                android:layout_width="35dp"
+                android:layout_height="70dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:alpha="0.9">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:paddingLeft="4dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:layout_weight="5" />
+
+            <LinearLayout
+                android:id="@+id/buttonInsideViePagerForward"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:alpha="0.9"
+
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:paddingLeft="4dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 </ScrollView>

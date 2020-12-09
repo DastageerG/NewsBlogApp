@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,19 +29,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class PostDetailsAdapter extends PagerAdapter
 {
     private Context context;
     private List<Post> postList;
-    private DatabaseReference databaseReference;
     private FireBaseMethods fireBaseMethods;
 
     public PostDetailsAdapter(Context context, List<Post> postList)
     {
         this.context = context;
         this.postList = postList;
-        databaseReference = FirebaseDatabase.getInstance().getReference();
         fireBaseMethods = new FireBaseMethods(context);
     }
 
@@ -69,7 +69,7 @@ public class PostDetailsAdapter extends PagerAdapter
 
         View view = LayoutInflater.from(context).inflate(R.layout.layout_post_details_view_pager, null);
 
-        ViewPager viewPager = view.findViewById(R.id.viewPagerInside);
+        final ViewPager viewPager = view.findViewById(R.id.viewPagerInside);
         ImageView imageViewPostImage = view.findViewById(R.id.imageViewLayoutPostDetailsViewPagerPostImage);
         final TextView textViewPostTitle, textViewTimeAndName, textViewDescription, textViewImageDescription;
 
@@ -101,34 +101,51 @@ public class PostDetailsAdapter extends PagerAdapter
             {
                 if (userName != null)
                 {
-                    textViewTimeAndName.setText(userName + " | " + getRelationTime(post.getTimestamp()));
+                    textViewTimeAndName.setText(userName + " | " + TimeFormat.getRelationTime(post.getTimestamp()));
                 }
-
             }
         });
 
 
-        databaseReference.child(Constants.USERS).child(userId).addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                if (snapshot.exists())
-                {
-                    User user = snapshot.getValue(User.class);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
-
-            }
-        });
-
-        InSideViewPagerAdapter adapter = new InSideViewPagerAdapter(context, postList);
-        viewPager.setAdapter(adapter);
+//        final InSideViewPagerAdapter adapter = new InSideViewPagerAdapter(context, postList);
+//        viewPager.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//
+//
+//
+//        LinearLayout linearLayoutBack , linearLayoutForward;
+//        linearLayoutBack = view.findViewById(R.id.buttonInsideViePagerBack);
+//        linearLayoutForward = view.findViewById(R.id.buttonInsideViePagerForward);
+//
+////
+////        final int min = 20;
+////        final int max = 80;
+//
+//
+//        linearLayoutBack.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//
+//                final int random = new Random().nextInt((postList.size()-1 - 0) + 1) + 0;
+//                int inc =  (viewPager.getCurrentItem()-1)%postList.size();
+//                viewPager.setCurrentItem(random,true);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+//
+//        linearLayoutForward.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                final int random = new Random().nextInt((postList.size()-1 - 0) + 1) + 0;
+//                int inc =  (viewPager.getCurrentItem()+1)%postList.size();
+//                viewPager.setCurrentItem(random,true);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 
 
         container.addView(view);
@@ -136,37 +153,7 @@ public class PostDetailsAdapter extends PagerAdapter
     }
 
 
-    public static final long AVERAGE_MONTH_IN_MILLIS = DateUtils.DAY_IN_MILLIS * 30;
 
-    public String getRelationTime(long time)
-    {
-        final long now = new Date().getTime();
-        final long delta = now - time;
-        long resolution;
-        if (delta <= DateUtils.MINUTE_IN_MILLIS)
-        {
-            resolution = DateUtils.SECOND_IN_MILLIS;
-        } else if (delta <= DateUtils.HOUR_IN_MILLIS)
-        {
-            resolution = DateUtils.MINUTE_IN_MILLIS;
-        } else if (delta <= DateUtils.DAY_IN_MILLIS)
-        {
-            resolution = DateUtils.HOUR_IN_MILLIS;
-        } else if (delta <= DateUtils.WEEK_IN_MILLIS)
-        {
-            resolution = DateUtils.DAY_IN_MILLIS;
-        } else if (delta <= AVERAGE_MONTH_IN_MILLIS)
-        {
-            return Integer.toString((int) (delta / DateUtils.WEEK_IN_MILLIS)) + " weeks(s) ago";
-        } else if (delta <= DateUtils.YEAR_IN_MILLIS)
-        {
-            return Integer.toString((int) (delta / AVERAGE_MONTH_IN_MILLIS)) + " month(s) ago";
-        } else
-        {
-            return Integer.toString((int) (delta / DateUtils.YEAR_IN_MILLIS)) + " year(s) ago";
-        }
-        return DateUtils.getRelativeTimeSpanString(time, now, resolution).toString();
-    }
 
 
 } // class closed
