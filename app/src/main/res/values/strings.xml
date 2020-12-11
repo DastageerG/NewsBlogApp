@@ -3,4 +3,20 @@
     <string name="home_latest">Home Latest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="top">Home</string>
+    <string name="latest">Latest</string>
+    <string name="pakistan">Pakistan</string>
+    <string name="entertinment">Entertainment</string>
+    <string name="opinion">Opinion</string>
+    <string name="world">World</string>
+    <string name="sports">Sports</string>
+    <string name="magazine">Magazine</string>
+    <string name="business">Business</string>
+    <string name="FM">FM</string>
+    <string name="search">search</string>
+    <string name="settings">settings</string>
+    <string name="bookmarks">bookmarks</string>
+    <string name="liveTV">Live Tv</string>
+    <string name="aboutus">about us</string>
+    <string name="feedback">feedback</string>
 </resources>

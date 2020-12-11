@@ -16,14 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsblogapp.FireBaseMethods;
 import com.example.newsblogapp.R;
+import com.example.newsblogapp.activities.HomeActivity;
 import com.example.newsblogapp.activities.PostDetailsActivity;
 import com.example.newsblogapp.model.Post;
+import com.example.newsblogapp.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
 
-import static com.example.newsblogapp.adapter.TimeFormat.getRelationTime;
+import static com.example.newsblogapp.adapter.AdapterUtils.getRelationTime;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>
 {
@@ -66,7 +68,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         Post post = postList.get(position);
         Picasso.get().load(post.getPostThumbnailUrl()).placeholder(context.getResources().getDrawable(R.color.colorPrimaryDark)).into(holder.imageViewPostThumbNail);
         holder.textViewPostTitle.setText(post.getPostTitle());
-        holder.textViewTime.setText("UPDATED  " + TimeFormat.getRelationTime(post.getTimestamp()));
+        holder.textViewTime.setText("UPDATED  " + AdapterUtils.getRelationTime(post.getTimestamp()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -74,7 +76,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             public void onClick(View v)
             {
                 Intent intent = new Intent(context, PostDetailsActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra(Constants.fragName, HomeActivity.textViewFragmentName.getText().toString().trim());
+                intent.putExtra(Constants.position, position);
                 context.startActivity(intent);
             } // onClick closed
         });

@@ -30,12 +30,12 @@
                 android:layout_alignParentLeft="true" />
 
             <TextView
-                android:id="@+id/textViewHomeActivityHome"
+                android:id="@+id/textViewPostDetailsActivityFragmentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
                 android:textAlignment="center"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 android:textColor="@color/colorWhite"
                 android:paddingRight="40dp"
                 android:layout_toEndOf="@id/imageViewPostDetailsActivityBack"
@@ -81,7 +81,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txtTop"
+                android:id="@+id/texViewPostDetailsActivityTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -92,12 +92,12 @@
                 android:layout_marginLeft="60dp" />
 
             <TextView
-                android:id="@+id/textBawn"
+                android:id="@+id/textViewPostDetailsActivityDawn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_toLeftOf="@id/txtLatest"
-                android:layout_toRightOf="@id/txtTop"
+                android:layout_toLeftOf="@id/texViewPostDetailsActivityLatest"
+                android:layout_toRightOf="@id/texViewPostDetailsActivityTop"
                 android:text="Dawn"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
@@ -105,7 +105,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtLatest"
+                android:id="@+id/texViewPostDetailsActivityLatest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

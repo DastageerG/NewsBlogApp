@@ -55,10 +55,10 @@ public class FireBaseMethods
 
     ////
 
-    public void getAllPosts(final PostsListCallBack callBack)
+    public void getAllPosts(String table, final PostsListCallBack callBack)
     {
         progressBar.setVisibility(View.VISIBLE);
-        databaseReference.child(Constants.Posts).addValueEventListener(new ValueEventListener()
+        databaseReference.child(Constants.Posts).child(table).addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)

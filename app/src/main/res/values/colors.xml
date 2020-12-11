@@ -22,4 +22,7 @@
     <color name="colorTransparent">#80032e42</color>
 
 
+    <color name="colorSettingGridView">#E6032e42</color>
+
+
 </resources>

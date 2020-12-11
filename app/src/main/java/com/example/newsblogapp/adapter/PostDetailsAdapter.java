@@ -101,51 +101,50 @@ public class PostDetailsAdapter extends PagerAdapter
             {
                 if (userName != null)
                 {
-                    textViewTimeAndName.setText(userName + " | " + TimeFormat.getRelationTime(post.getTimestamp()));
+                    textViewTimeAndName.setText(userName + " | " + AdapterUtils.getRelationTime(post.getTimestamp()));
                 }
             }
         });
 
 
-//        final InSideViewPagerAdapter adapter = new InSideViewPagerAdapter(context, postList);
-//        viewPager.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        final InSideViewPagerAdapter adapter = new InSideViewPagerAdapter(context, postList);
+        viewPager.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
+        LinearLayout linearLayoutBack, linearLayoutForward;
+        linearLayoutBack = view.findViewById(R.id.buttonInsideViePagerBack);
+        linearLayoutForward = view.findViewById(R.id.buttonInsideViePagerForward);
+
 //
-//
-//
-//        LinearLayout linearLayoutBack , linearLayoutForward;
-//        linearLayoutBack = view.findViewById(R.id.buttonInsideViePagerBack);
-//        linearLayoutForward = view.findViewById(R.id.buttonInsideViePagerForward);
-//
-////
-////        final int min = 20;
-////        final int max = 80;
-//
-//
-//        linearLayoutBack.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//
-//                final int random = new Random().nextInt((postList.size()-1 - 0) + 1) + 0;
-//                int inc =  (viewPager.getCurrentItem()-1)%postList.size();
-//                viewPager.setCurrentItem(random,true);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-//
-//        linearLayoutForward.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                final int random = new Random().nextInt((postList.size()-1 - 0) + 1) + 0;
-//                int inc =  (viewPager.getCurrentItem()+1)%postList.size();
-//                viewPager.setCurrentItem(random,true);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+//        final int min = 20;
+//        final int max = 80;
+
+
+        linearLayoutBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                final int random = new Random().nextInt((postList.size() - 1 - 0) + 1) + 0;
+                int inc = (viewPager.getCurrentItem() - 1) % postList.size();
+                viewPager.setCurrentItem(random, true);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        linearLayoutForward.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                final int random = new Random().nextInt((postList.size() - 1 - 0) + 1) + 0;
+                int inc = (viewPager.getCurrentItem() + 1) % postList.size();
+                viewPager.setCurrentItem(random, true);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
 
         container.addView(view);

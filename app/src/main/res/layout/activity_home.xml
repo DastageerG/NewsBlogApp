@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textViewHomeActivityHome"
+                android:id="@+id/textViewHomeActivityFragmentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
@@ -35,19 +35,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="18dp"
                 android:clickable="true"
-                android:layout_toLeftOf="@id/textViewHomeActivityHome" />
+                android:layout_toLeftOf="@id/textViewHomeActivityFragmentName" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewHomeActivity"
+    <FrameLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolBarHomeActivity"
         android:layout_above="@id/bottomToolBar" />
 
     <ProgressBar
-        android:id="@+id/progressBarHomeActivity"
+        android:id="@+id/progressBarHomeFragment"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txtTop"
+                android:id="@+id/texViewHomeActivityTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -77,20 +77,21 @@
                 android:layout_marginLeft="60dp" />
 
             <TextView
-                android:id="@+id/textBawn"
+                android:id="@+id/textViewHomeActivityDawn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_toLeftOf="@id/txtLatest"
-                android:layout_toRightOf="@id/txtTop"
+                android:layout_toLeftOf="@id/texViewHomeActivityLatest"
+                android:layout_toRightOf="@id/texViewHomeActivityTop"
+                android:clickable="true"
+                android:fontFamily="@font/adamina"
                 android:text="Dawn"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textSize="32sp" />
 
             <TextView
-                android:id="@+id/txtLatest"
+                android:id="@+id/texViewHomeActivityLatest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

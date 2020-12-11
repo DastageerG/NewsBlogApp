@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/RelativeLayoutSheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:background="@color/colorTransparent"
+    app:behavior_hideable="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/layout1">
+
+        <TextView
+            android:id="@+id/textViewLayoutCategoriesBottomSheetDawn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dawn"
+            android:textSize="24sp"
+            android:fontFamily="@font/adamina"
+            android:textColor="@color/colorWhite"
+            android:layout_centerHorizontal="true" />
+
+
+        <TextView
+            android:id="@+id/textViewLayoutCategoriesBottomSheetTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOP"
+            android:textSize="14sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toStartOf="@id/textViewLayoutCategoriesBottomSheetDawn"
+            android:layout_marginEnd="60dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textViewLayoutCategoriesBottomSheetLatest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LATEST"
+            android:textSize="14sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toEndOf="@id/textViewLayoutCategoriesBottomSheetDawn"
+            android:layout_marginStart="60dp"
+            android:layout_centerVertical="true"
+
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewLineWhite"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/layout1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <GridView
+        android:id="@+id/gridViewCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="20dp"
+        android:layout_below="@id/viewLineWhite"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="20dp" />
+
+    <View
+        android:id="@+id/viewLineGray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrey"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/gridViewCategories"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <GridView
+        android:id="@+id/gridViewSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:layout_below="@id/viewLineGray"
+        android:background="@color/colorPrimaryDark"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="8dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:paddingTop="25dp"
+
+
+        />
+
+
+</RelativeLayout>
