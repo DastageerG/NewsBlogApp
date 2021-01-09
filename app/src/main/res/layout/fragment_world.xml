@@ -18,9 +18,11 @@
     <ProgressBar
         android:id="@+id/progressBarWorldFragment"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:indeterminateTint="@color/colorPrimaryDark"
         android:visibility="gone"
 
         />

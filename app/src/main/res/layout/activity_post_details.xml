@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PostDetailsActivity">
+    tools:context=".activities.PostDetailsActivity"
+
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBarPostDetailsActivity"
@@ -42,7 +44,6 @@
                 android:layout_toStartOf="@id/imageViewPostDetailsActivitySearch" />
 
             <ImageView
-
                 android:id="@+id/imageViewPostDetailsActivitySearch"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -56,17 +57,20 @@
     <ProgressBar
         android:id="@+id/progressBarPostDetailsActivity"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="visible" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerPostDetailsActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolBarPostDetailsActivity"
-        android:layout_above="@id/bottomToolBarPostDetailsActivity" />
+        android:layout_above="@id/bottomToolBarPostDetailsActivity"
+
+        />
 
 
     <androidx.appcompat.widget.Toolbar

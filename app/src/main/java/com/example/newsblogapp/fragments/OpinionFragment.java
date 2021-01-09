@@ -28,7 +28,6 @@ import java.util.List;
 public class OpinionFragment extends Fragment
 {
 
-
     public static final String TAG = "1111";
     private RecyclerView recyclerView;
     private FireBaseMethods fireBaseMethods;

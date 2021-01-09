@@ -53,12 +53,12 @@ public class FireBaseMethods
         databaseReference.keepSynced(true);
     }
 
-    ////
 
-    public void getAllPosts(String table, final PostsListCallBack callBack)
+    /// get All Posts Within category Posts
+    public void getAllPosts(String category, final PostsListCallBack callBack)
     {
         progressBar.setVisibility(View.VISIBLE);
-        databaseReference.child(Constants.Posts).child(table).addValueEventListener(new ValueEventListener()
+        databaseReference.child(Constants.Posts).child(category).addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -74,38 +74,6 @@ public class FireBaseMethods
                     } // for closed
                     callBack.postList(allPosts);
                 } // if closed
-
-            } // onDataChange closed
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
-                Toast.makeText(context, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onCancelled: " + databaseError.getMessage());
-            } // onCancelled closed
-        }); // addValueEventListener closed
-    } // getAllPosts closed
-
-
-    public void getEveryPosts(final PostsListCallBack callBack)
-    {
-        databaseReference.child(Constants.Posts).addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-
-                allPosts = new ArrayList<>();
-                if (dataSnapshot.exists())
-                {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                    {
-                        Post post = snapshot.getValue(Post.class);
-                        allPosts.add(post);
-                    } // for closed
-                    callBack.postList(allPosts);
-                } // if closed
-
             } // onDataChange closed
 
             @Override
@@ -120,7 +88,6 @@ public class FireBaseMethods
 
     public void getUserName(String userId, final UserNameCallBack callBack)
     {
-
         databaseReference.child(Constants.USERS).child(userId).addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -139,8 +106,35 @@ public class FireBaseMethods
 
             }
         });
-
     } // getUseName Method closed
+
+    // overRiding method for getting All Posts (For Search)
+    public void getAllPost(final PostsListCallBack postsListCallBack)
+    {
+        final List<Post> postList = new ArrayList<>();
+        databaseReference.child(Constants.All).addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                if (snapshot.exists())
+                {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                    {
+                        Post bean = dataSnapshot.getValue(Post.class);
+                        postList.add(bean);
+                    } // for closed
+                    postsListCallBack.postList(postList);
+                } // if closed
+            } // closed
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+
+            }
+        });
+    } // getAllPost closed
 
 
 } // firebaseMethod closed

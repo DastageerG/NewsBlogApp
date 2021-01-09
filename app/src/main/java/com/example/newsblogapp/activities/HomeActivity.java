@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.newsblogapp.R;
 import com.example.newsblogapp.adapter.AdapterUtils;
 import com.example.newsblogapp.adapter.CategoriesGridViewAdapter;
@@ -68,18 +67,19 @@ public class HomeActivity extends AppCompatActivity
 
 
         categoriesHashMap = new HashMap<>();
-        categoriesHashMap.put(getString(R.string.opinion), new OpinionFragment());
-        categoriesHashMap.put(getString(R.string.world), new WorldFragment());
-        categoriesHashMap.put(getString(R.string.sports), new SportsFragment());
-        categoriesHashMap.put(getString(R.string.magazine), new MagazineFragment());
-        categoriesHashMap.put(getString(R.string.business), new BusinessFragment());
-        categoriesHashMap.put(getString(R.string.FM), new CityFMFragment());
-        categoriesHashMap.put(getString(R.string.top), new HomeFragment());
-        categoriesHashMap.put(getString(R.string.latest), new LatestFragment());
-        categoriesHashMap.put(getString(R.string.pakistan), new PakistanFragment());
-        categoriesHashMap.put(getString(R.string.entertinment), new EntertainmentFragment());
+        categoriesHashMap.put(Constants.opinion, new OpinionFragment());
+        categoriesHashMap.put(Constants.world, new WorldFragment());
+        categoriesHashMap.put(Constants.sports, new SportsFragment());
+        categoriesHashMap.put(Constants.magazine, new MagazineFragment());
+        categoriesHashMap.put(Constants.business, new BusinessFragment());
+        categoriesHashMap.put("FM", new CityFMFragment());
+        categoriesHashMap.put("Home", new HomeFragment());
+        categoriesHashMap.put(Constants.latest, new LatestFragment());
+        categoriesHashMap.put(Constants.pakistan, new PakistanFragment());
+        categoriesHashMap.put(Constants.entertainment, new EntertainmentFragment());
 
 
+        // coming from PostDetailsActivity // receive intent and show that fragment
         if (getIntent().getExtras() != null)
         {
             // position cum requestCode
@@ -99,6 +99,8 @@ public class HomeActivity extends AppCompatActivity
             } // else closed
 
         } // if closed
+
+        // else  = if launching first time , show home fragment
         else
         {
             setFragmentAndTextView("Home", new HomeFragment());
@@ -116,13 +118,13 @@ public class HomeActivity extends AppCompatActivity
         });
 
 
+        // bottom toolbar Events  (BottomSheet Dialog also has the same buttons)
         textViewTop.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 setFragmentAndTextView("Home", new HomeFragment());
-
             }
         });
         textViewLatest.setOnClickListener(new View.OnClickListener()
@@ -147,13 +149,24 @@ public class HomeActivity extends AppCompatActivity
 
     } // onCreate
 
+    // method for setting fragment name at the top and replacing fragment
     public void setFragmentAndTextView(String text, Fragment fragment)
     {
         String fragName = text.toUpperCase();
         textViewFragmentName.setText(fragName);
         replaceFragment(fragment);
-    }
 
+    } // setFragmentAndTexViewClosed
+
+    private boolean replaceFragment(Fragment fragment)
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.commit();
+        return true;
+    } /// replaceFragment
+
+    // bottomSheet Dialogue for categories
     private void inflateBottomSheetDialogue()
     {
 
@@ -168,12 +181,14 @@ public class HomeActivity extends AppCompatActivity
         GridView gridViewCategories, gridViewSettings;
         gridViewCategories = dialog.findViewById(R.id.gridViewCategories);
         gridViewSettings = dialog.findViewById(R.id.gridViewSettings);
+        /// BottomSheetDialog Events
         TextView textViewDawn, textViewLatest, textViewTop;
         textViewDawn = dialog.findViewById(R.id.textViewLayoutCategoriesBottomSheetDawn);
         textViewLatest = dialog.findViewById(R.id.textViewLayoutCategoriesBottomSheetLatest);
         textViewTop = dialog.findViewById(R.id.textViewLayoutCategoriesBottomSheetTop);
 
 
+        /// Setting hashMap is using dummy data for now
         HashMap<String, Fragment> settingsHashMap = new HashMap<>();
         settingsHashMap.put(getString(R.string.search), new HomeFragment());
         settingsHashMap.put(getString(R.string.settings), new HomeFragment());
@@ -235,15 +250,6 @@ public class HomeActivity extends AppCompatActivity
         });
         dialog.show();
     } // inflate dialogue closed
-
-
-    private boolean replaceFragment(Fragment fragment)
-    {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, fragment);
-        fragmentTransaction.commit();
-        return true;
-    } /// replaceFragment
 
 
 } // class closed

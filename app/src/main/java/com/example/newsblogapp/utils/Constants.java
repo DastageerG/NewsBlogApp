@@ -4,6 +4,7 @@ public class Constants
 {
     public static final String USERS = "Users";
     public static final String Posts = "Posts";
+    public static final String All = "All";
 
     // Storage Reference
     public static final String postImage = "postImages";

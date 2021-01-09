@@ -73,15 +73,11 @@ public class WorldFragment extends Fragment
 
     private void initViews(View view)
     {
-
-
         progressBar = view.findViewById(R.id.progressBarWorldFragment);
         fireBaseMethods = new FireBaseMethods(context, progressBar);
         recyclerView = view.findViewById(R.id.recyclerViewWorldFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setHasFixedSize(true);
-
-
-    }
+    } // initViews
 
 }

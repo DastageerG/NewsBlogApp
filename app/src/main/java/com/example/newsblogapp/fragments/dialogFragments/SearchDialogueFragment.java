@@ -72,7 +72,7 @@ public class SearchDialogueFragment extends DialogFragment
             }
         });
 
-        fireBaseMethods.getEveryPosts(new PostsListCallBack()
+        fireBaseMethods.getAllPost(new PostsListCallBack()
         {
             @Override
             public void postList(List<Post> postList)
@@ -82,7 +82,6 @@ public class SearchDialogueFragment extends DialogFragment
                     allPostList = postList;
                     adapter = new FilteredListAdapter(getActivity(), allPostList);
                     recyclerView.setAdapter(adapter);
-
                 } // if closed
             } // posList
         });
@@ -125,7 +124,6 @@ public class SearchDialogueFragment extends DialogFragment
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
         }
     } // onStart closed
 

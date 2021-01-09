@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ import com.example.newsblogapp.fragments.OpinionFragment;
 import com.example.newsblogapp.fragments.PakistanFragment;
 import com.example.newsblogapp.fragments.SportsFragment;
 import com.example.newsblogapp.fragments.WorldFragment;
+import com.example.newsblogapp.fragments.dialogFragments.SearchDialogueFragment;
 import com.example.newsblogapp.model.Post;
 import com.example.newsblogapp.utils.Constants;
 import com.example.newsblogapp.utils.PostsListCallBack;
@@ -47,18 +49,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostDetailsActivity extends AppCompatActivity
+public class PostDetailsActivity extends AppCompatActivity implements View.OnClickListener
 {
 
     public static final String TAG = "1111";
 
     private Context context = PostDetailsActivity.this;
-    private ViewPager viewPager, viewPagerNew;
+    private ViewPager viewPager;
     private ProgressBar progressBar;
     private int position;
     private String fragmentName;
     private FireBaseMethods fireBaseMethods;
     private TextView textViewDawn, textViewTop, textViewLatest, textViewFragmentName;
+    private ImageView imageViewBack, imageViewSearch;
 
     public static final int HOME_FRAG = 111;
     public static final int LATEST_FRAG = 222;
@@ -75,18 +78,24 @@ public class PostDetailsActivity extends AppCompatActivity
         textViewTop = findViewById(R.id.texViewPostDetailsActivityTop);
         textViewLatest = findViewById(R.id.texViewPostDetailsActivityLatest);
         textViewFragmentName = findViewById(R.id.textViewPostDetailsActivityFragmentName);
+        imageViewBack = findViewById(R.id.imageViewPostDetailsActivityBack);
+        imageViewSearch = findViewById(R.id.imageViewPostDetailsActivitySearch);
 
         fireBaseMethods = new FireBaseMethods(context, progressBar);
+
         position = getIntent().getExtras().getInt(Constants.position);
         fragmentName = getIntent().getExtras().getString(Constants.fragName);
+
+        // making first letter capital due to database structure like , Top , Latest
         String cap = fragmentName.substring(0, 1).toUpperCase() + fragmentName.substring(1).toLowerCase();
-        Log.d(TAG, "onCreate: " + cap);
+
         textViewFragmentName.setText(fragmentName);
         if (cap.equals("Home"))
         {
-            cap = "Top";
+            cap = "Top"; // because Home is not available in database but Top
         }
 
+        // getting Posts with respective to category
         fireBaseMethods.getAllPosts(cap, new PostsListCallBack()
         {
             @Override
@@ -100,33 +109,42 @@ public class PostDetailsActivity extends AppCompatActivity
             }
         });
 
+        textViewTop.setOnClickListener(this);
+        textViewLatest.setOnClickListener(this);
+        textViewDawn.setOnClickListener(this);
+        imageViewBack.setOnClickListener(this);
+        imageViewSearch.setOnClickListener(this);
 
-        textViewTop.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // sendPosition adds integer to intent and starts other activity
-                sendPosition(HOME_FRAG);
-            }
-        });
-        textViewLatest.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                sendPosition(LATEST_FRAG);
-            }
-        });
 
-        textViewDawn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                inflateBottomSheetDialogue();
-            }
-        });
+//        textViewTop.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                // sendPosition adds integer to intent and starts other activity
+//                sendPosition(HOME_FRAG); // HOME_FRAG is like Request Code of Activity
+//            } // onclick closed
+//        });
+//        textViewLatest.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                sendPosition(LATEST_FRAG);
+//
+//            } // onClick closed
+//        });
+//
+//        textViewDawn.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                inflateBottomSheetDialogue();
+//            }
+//        });
+
+
     } //onCreate closed
 
     private void inflateBottomSheetDialogue()
@@ -150,16 +168,16 @@ public class PostDetailsActivity extends AppCompatActivity
 
 
         final HashMap<String, Fragment> categoriesHashMap = new HashMap<>();
-        categoriesHashMap.put(getString(R.string.opinion), new OpinionFragment());
-        categoriesHashMap.put(getString(R.string.world), new WorldFragment());
-        categoriesHashMap.put(getString(R.string.sports), new SportsFragment());
-        categoriesHashMap.put(getString(R.string.magazine), new MagazineFragment());
-        categoriesHashMap.put(getString(R.string.business), new BusinessFragment());
-        categoriesHashMap.put(getString(R.string.FM), new CityFMFragment());
-        categoriesHashMap.put(getString(R.string.top), new HomeFragment());
-        categoriesHashMap.put(getString(R.string.latest), new LatestFragment());
-        categoriesHashMap.put(getString(R.string.pakistan), new PakistanFragment());
-        categoriesHashMap.put(getString(R.string.entertinment), new EntertainmentFragment());
+        categoriesHashMap.put(Constants.opinion, new OpinionFragment());
+        categoriesHashMap.put(Constants.world, new WorldFragment());
+        categoriesHashMap.put(Constants.sports, new SportsFragment());
+        categoriesHashMap.put(Constants.magazine, new MagazineFragment());
+        categoriesHashMap.put(Constants.business, new BusinessFragment());
+        categoriesHashMap.put("FM", new CityFMFragment());
+        categoriesHashMap.put("Home", new HomeFragment());
+        categoriesHashMap.put(Constants.latest, new LatestFragment());
+        categoriesHashMap.put(Constants.pakistan, new PakistanFragment());
+        categoriesHashMap.put(Constants.entertainment, new EntertainmentFragment());
 
 
         HashMap<String, Fragment> settingsHashMap = new HashMap<>();
@@ -217,6 +235,7 @@ public class PostDetailsActivity extends AppCompatActivity
             } /// onItemClick closed
         });
         dialog.show();
+
     } // inflate DialogClosed
 
     private void sendPosition(int position)
@@ -228,4 +247,28 @@ public class PostDetailsActivity extends AppCompatActivity
     } /// sendPosition closed
 
 
+    @Override
+    public void onClick(View v)
+    {
+
+        switch (v.getId())
+        {
+            case R.id.texViewPostDetailsActivityTop:
+                sendPosition(HOME_FRAG);
+                break;
+            case R.id.textViewPostDetailsActivityDawn:
+                inflateBottomSheetDialogue();
+                break;
+            case R.id.texViewPostDetailsActivityLatest:
+                sendPosition(LATEST_FRAG);
+                break;
+            case R.id.imageViewPostDetailsActivityBack:
+                finish();
+                break;
+            case R.id.imageViewPostDetailsActivitySearch:
+                SearchDialogueFragment dialog = new SearchDialogueFragment();
+                dialog.show(getSupportFragmentManager(), "searchFragment");
+                break;
+        } // switch closed
+    } // onClick closed
 } /// class closed

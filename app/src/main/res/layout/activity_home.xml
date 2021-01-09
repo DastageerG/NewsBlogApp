@@ -39,20 +39,28 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#A81A0F"
+        android:id="@+id/LayoutCoronaVirus"
+        android:layout_below="@id/toolBarHomeActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorWhite"
+            android:text="CORONAVIRUS - Live On Dawn.com" />
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolBarHomeActivity"
+        android:layout_below="@id/LayoutCoronaVirus"
         android:layout_above="@id/bottomToolBar" />
 
-    <ProgressBar
-        android:id="@+id/progressBarHomeFragment"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
