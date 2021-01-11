@@ -106,7 +106,7 @@ public class SearchDialogueFragment extends DialogFragment
             @Override
             public void afterTextChanged(Editable s)
             {
-                //  recyclerView.removea
+
             }
         });
 

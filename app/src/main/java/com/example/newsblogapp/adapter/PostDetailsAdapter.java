@@ -2,6 +2,7 @@ package com.example.newsblogapp.adapter;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.newsblogapp.model.Post;
 import com.example.newsblogapp.model.User;
 
 import com.example.newsblogapp.utils.Constants;
+import com.example.newsblogapp.utils.PostsListCallBack;
 import com.example.newsblogapp.utils.UserNameCallBack;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -145,7 +147,6 @@ public class PostDetailsAdapter extends PagerAdapter
                 adapter.notifyDataSetChanged();
             }
         });
-
 
         container.addView(view);
         return view;

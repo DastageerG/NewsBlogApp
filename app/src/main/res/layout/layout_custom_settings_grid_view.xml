@@ -7,7 +7,7 @@
         android:id="@+id/textViewCustomSettingsGridViewSettingName"
         android:layout_width="100dp"
         android:layout_height="25dp"
-        android:text="@string/top"
+        android:text="top"
         android:textAlignment="textStart"
         android:textAllCaps="true"
         android:textSize="12sp"

@@ -64,8 +64,13 @@ public class InSideViewPagerAdapter extends PagerAdapter
         View view = LayoutInflater.from(context).inflate(R.layout.layout_inside_view_pager, null);
 
         ImageView imageView = view.findViewById(R.id.imageViewLayoutInsideViewPagerThumbNail);
+        TextView textViewPostTitle = view.findViewById(R.id.textViewLayoutInsideViewPagerPostTitle);
+        TextView textViewPostTime = view.findViewById(R.id.textViewLayoutInsideViePagerPostTime);
+
         Post bean = postList.get(position);
         Picasso.get().load(bean.getPostImageUrl()).placeholder(R.color.colorWhite).into(imageView);
+        textViewPostTitle.setText(bean.getPostTitle());
+        textViewPostTime.setText("UPDATED  " + AdapterUtils.getRelationTime(bean.getTimestamp()));
         container.addView(view);
         return view;
     }
